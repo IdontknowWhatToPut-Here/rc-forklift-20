@@ -37,12 +37,14 @@ control.onEvent(EventBusSource.MES_DPAD_CONTROLLER_ID, EventBusValue.MICROBIT_EV
         }
         maqueen.servoRun(maqueen.Servos.S2, SERVO)
     } else if (control.eventValue() == EventBusValue.MES_DPAD_BUTTON_2_DOWN) {
+        Change_SFX += 1
         if (_ == 0) {
             music.playMelody("C5 C5 C5 - - C5 C5 C5 ", 1000)
         }
         if (_ == 1) {
             soundExpression.giggle.playUntilDone()
         }
+        Change_SFX = 0
     } else if (control.eventValue() == EventBusValue.MES_DPAD_BUTTON_3_DOWN) {
         if (SPEED == 100) {
             SPEED = 200
@@ -69,6 +71,7 @@ control.onEvent(EventBusSource.MES_DPAD_CONTROLLER_ID, EventBusValue.MICROBIT_EV
         maqueen.motorStop(maqueen.Motors.All)
     }
 })
+let Change_SFX = 0
 let SPEED = 0
 let TURN_MODE = false
 let SERVO = 0
