@@ -14,12 +14,14 @@ input.onButtonPressed(Button.B, function () {
 control.onEvent(EventBusSource.MES_DPAD_CONTROLLER_ID, EventBusValue.MICROBIT_EVT_ANY, function () {
     if (control.eventValue() == EventBusValue.MES_DPAD_BUTTON_A_DOWN) {
         if (RECORD == true) {
+            StartTimer()
             maqueen.motorRun(maqueen.Motors.All, maqueen.Dir.CW, SPEED)
         } else {
             maqueen.motorRun(maqueen.Motors.All, maqueen.Dir.CW, SPEED)
         }
     } else if (control.eventValue() == EventBusValue.MES_DPAD_BUTTON_B_DOWN) {
         if (RECORD == true) {
+            StartTimer()
             maqueen.motorRun(maqueen.Motors.All, maqueen.Dir.CCW, SPEED)
         } else {
             maqueen.motorRun(maqueen.Motors.All, maqueen.Dir.CCW, SPEED)
@@ -27,6 +29,7 @@ control.onEvent(EventBusSource.MES_DPAD_CONTROLLER_ID, EventBusValue.MICROBIT_EV
     } else if (control.eventValue() == EventBusValue.MES_DPAD_BUTTON_C_DOWN) {
         if (TURN_MODE == true) {
             if (RECORD == true) {
+                StartTimer()
                 maqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CW, 200)
                 maqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CW, SPEED / 4)
             } else {
@@ -35,6 +38,7 @@ control.onEvent(EventBusSource.MES_DPAD_CONTROLLER_ID, EventBusValue.MICROBIT_EV
             }
         } else {
             if (RECORD == true) {
+                StartTimer()
                 maqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CW, SPEED)
                 maqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CCW, SPEED)
             } else {
@@ -45,6 +49,7 @@ control.onEvent(EventBusSource.MES_DPAD_CONTROLLER_ID, EventBusValue.MICROBIT_EV
     } else if (control.eventValue() == EventBusValue.MES_DPAD_BUTTON_D_DOWN) {
         if (TURN_MODE == true) {
             if (RECORD == true) {
+                StartTimer()
                 maqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CW, 200)
                 maqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CW, SPEED / 4)
             } else {
@@ -53,6 +58,7 @@ control.onEvent(EventBusSource.MES_DPAD_CONTROLLER_ID, EventBusValue.MICROBIT_EV
             }
         } else {
             if (RECORD == true) {
+                StartTimer()
                 maqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CW, SPEED)
                 maqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CCW, SPEED)
             } else {
@@ -132,6 +138,40 @@ control.onEvent(EventBusSource.MES_DPAD_CONTROLLER_ID, EventBusValue.MICROBIT_EV
         } else if (cycle == 3) {
         	
         }
+    } else if (control.eventValue() == EventBusValue.MES_DPAD_BUTTON_A_UP) {
+        if (RECORD == true) {
+            Stop_Timer()
+            text_list.push("Forwards")
+            servos.push("")
+            list.push(Timer)
+        }
+    } else if (control.eventValue() == EventBusValue.MES_DPAD_BUTTON_B_UP) {
+        if (RECORD == true) {
+            Stop_Timer()
+            text_list.push("Backwards")
+            servos.push("")
+            list.push(Timer)
+        }
+    } else if (control.eventValue() == EventBusValue.MES_DPAD_BUTTON_C_UP) {
+        if (RECORD == true) {
+            Stop_Timer()
+            text_list.push("Left")
+            servos.push("")
+            list.push(Timer)
+        }
+    } else if (control.eventValue() == EventBusValue.MES_DPAD_BUTTON_D_UP) {
+        if (RECORD == true) {
+            Stop_Timer()
+            text_list.push("Right")
+            servos.push("")
+            list.push(Timer)
+        }
+    } else if (control.eventValue() == EventBusValue.MES_DPAD_BUTTON_1_UP) {
+        if (RECORD == true) {
+            servos.push("Servo")
+            text_list.push("")
+            list.push(-10)
+        }
     } else {
         maqueen.motorStop(maqueen.Motors.All)
     }
@@ -148,6 +188,12 @@ let TURN_MODE = false
 let SERVO = 0
 let RECORD = false
 let cycle = 0
+let list: number[] = []
+let servos: string[] = []
+let text_list: string[] = []
+text_list = []
+servos = []
+list = []
 cycle = 1
 RECORD = false
 SERVO = 30
