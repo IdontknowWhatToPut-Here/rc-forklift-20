@@ -37,41 +37,62 @@ control.onEvent(EventBusSource.MES_DPAD_CONTROLLER_ID, EventBusValue.MICROBIT_EV
         }
         maqueen.servoRun(maqueen.Servos.S2, SERVO)
     } else if (control.eventValue() == EventBusValue.MES_DPAD_BUTTON_2_DOWN) {
-        Change_SFX += 1
-        if (_ == 0) {
-            music.playMelody("C5 C5 C5 - - C5 C5 C5 ", 1000)
+        if (cycle == 1) {
+            cycle = 2
+        } else if (cycle == 2) {
+            cycle = 3
+        } else if (cycle == 3) {
+            cycle = 1
         }
-        if (_ == 1) {
-            soundExpression.giggle.playUntilDone()
-        }
-        Change_SFX = 0
     } else if (control.eventValue() == EventBusValue.MES_DPAD_BUTTON_3_DOWN) {
-        if (SPEED == 100) {
-            SPEED = 200
-            basic.showLeds(`
-                . # # . .
-                . . . # .
-                . . # . .
-                . # . . .
-                . # # # .
-                `)
-        } else {
-            SPEED = 100
-            basic.showLeds(`
-                . . # . .
-                . # # . .
-                . . # . .
-                . . # . .
-                . # # # .
-                `)
+        if (cycle == 1) {
+            TURN_MODE = !(TURN_MODE)
+        } else if (cycle == 2) {
+            if (Change_SFX == 1) {
+                Change_SFX = 2
+            } else if (Change_SFX == 2) {
+                Change_SFX = 1
+            }
+        } else if (cycle == 3) {
+        	
         }
     } else if (control.eventValue() == EventBusValue.MES_DPAD_BUTTON_4_DOWN) {
-        TURN_MODE = !(TURN_MODE)
+        if (cycle == 1) {
+            if (SPEED == 100) {
+                SPEED = 200
+                basic.showLeds(`
+                    . # # . .
+                    . . . # .
+                    . . # . .
+                    . # . . .
+                    . # # # .
+                    `)
+            } else {
+                SPEED = 100
+                basic.showLeds(`
+                    . . # . .
+                    . # # . .
+                    . . # . .
+                    . . # . .
+                    . # # # .
+                    `)
+            }
+        } else if (cycle == 2) {
+            if (Change_SFX == 1) {
+                music.playMelody("C5 C5 C5 - - C5 C5 C5 ", 1000)
+            }
+            if (Change_SFX == 2) {
+                soundExpression.giggle.playUntilDone()
+            }
+        } else if (cycle == 3) {
+        	
+        }
     } else {
         maqueen.motorStop(maqueen.Motors.All)
     }
 })
 let Change_SFX = 0
+let cycle = 0
 let SPEED = 0
 let TURN_MODE = false
 let SERVO = 0
