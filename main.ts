@@ -143,28 +143,28 @@ control.onEvent(EventBusSource.MES_DPAD_CONTROLLER_ID, EventBusValue.MICROBIT_EV
             Stop_Timer()
             text_list.push("Forwards")
             servos.push("")
-            list.push(Timer)
+            list.push(elapsed)
         }
     } else if (control.eventValue() == EventBusValue.MES_DPAD_BUTTON_B_UP) {
         if (RECORD == true) {
             Stop_Timer()
             text_list.push("Backwards")
             servos.push("")
-            list.push(Timer)
+            list.push(elapsed)
         }
     } else if (control.eventValue() == EventBusValue.MES_DPAD_BUTTON_C_UP) {
         if (RECORD == true) {
             Stop_Timer()
             text_list.push("Left")
             servos.push("")
-            list.push(Timer)
+            list.push(elapsed)
         }
     } else if (control.eventValue() == EventBusValue.MES_DPAD_BUTTON_D_UP) {
         if (RECORD == true) {
             Stop_Timer()
             text_list.push("Right")
             servos.push("")
-            list.push(Timer)
+            list.push(elapsed)
         }
     } else if (control.eventValue() == EventBusValue.MES_DPAD_BUTTON_1_UP) {
         if (RECORD == true) {
