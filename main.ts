@@ -1,6 +1,9 @@
 input.onButtonPressed(Button.A, function () {
     basic.showIcon(IconNames.Happy)
 })
+function Stop_Timer () {
+    elapsed = input.runningTime() - Timer
+}
 input.onButtonPressed(Button.B, function () {
     if (_ == 1) {
         _ = 0
@@ -91,8 +94,13 @@ control.onEvent(EventBusSource.MES_DPAD_CONTROLLER_ID, EventBusValue.MICROBIT_EV
         maqueen.motorStop(maqueen.Motors.All)
     }
 })
+function StartTimer () {
+    Timer = input.runningTime()
+}
 let Change_SFX = 0
 let cycle = 0
+let Timer = 0
+let elapsed = 0
 let SPEED = 0
 let TURN_MODE = false
 let SERVO = 0
