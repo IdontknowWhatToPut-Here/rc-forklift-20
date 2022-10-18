@@ -14,6 +14,14 @@ function bob () {
                     SERVO = 30
                 }
             }
+            if (text_list[index] == "Forwards") {
+                Time = list[index]
+                while (!(Time == 0 || Time < 0)) {
+                    Time = Time - 0.001
+                    maqueen.motorRun(maqueen.Motors.All, maqueen.Dir.CW, SPEED)
+                    basic.pause(1)
+                }
+            }
         }
     }
 }
@@ -204,7 +212,9 @@ control.onEvent(EventBusSource.MES_DPAD_CONTROLLER_ID, EventBusValue.MICROBIT_EV
             list.push(-10)
         }
     } else {
-        maqueen.motorStop(maqueen.Motors.All)
+        if (!(Playback)) {
+            maqueen.motorStop(maqueen.Motors.All)
+        }
     }
 })
 function StartTimer () {
@@ -212,6 +222,7 @@ function StartTimer () {
 }
 let Change_SFX = 0
 let _ = 0
+let Time = 0
 let Timer = 0
 let elapsed = 0
 let Playback = false
