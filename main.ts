@@ -1,8 +1,21 @@
+function Stop_Timer () {
+    elapsed = input.runningTime() - Timer
+}
 input.onButtonPressed(Button.A, function () {
     basic.showIcon(IconNames.Happy)
 })
-function Stop_Timer () {
-    elapsed = input.runningTime() - Timer
+function bob () {
+    while (Playback == true) {
+        for (let index = 0; index <= list.length; index++) {
+            if (servos[index] == "Servo") {
+                if (SERVO == 30) {
+                    SERVO = 0
+                } else {
+                    SERVO = 30
+                }
+            }
+        }
+    }
 }
 input.onButtonPressed(Button.B, function () {
     if (_ == 1) {
@@ -13,74 +26,84 @@ input.onButtonPressed(Button.B, function () {
 })
 control.onEvent(EventBusSource.MES_DPAD_CONTROLLER_ID, EventBusValue.MICROBIT_EVT_ANY, function () {
     if (control.eventValue() == EventBusValue.MES_DPAD_BUTTON_A_DOWN) {
-        if (RECORD == true) {
-            StartTimer()
-            maqueen.motorRun(maqueen.Motors.All, maqueen.Dir.CW, SPEED)
-        } else {
-            maqueen.motorRun(maqueen.Motors.All, maqueen.Dir.CW, SPEED)
+        if (!(Playback)) {
+            if (RECORD == true) {
+                StartTimer()
+                maqueen.motorRun(maqueen.Motors.All, maqueen.Dir.CW, SPEED)
+            } else {
+                maqueen.motorRun(maqueen.Motors.All, maqueen.Dir.CW, SPEED)
+            }
         }
     } else if (control.eventValue() == EventBusValue.MES_DPAD_BUTTON_B_DOWN) {
-        if (RECORD == true) {
-            StartTimer()
-            maqueen.motorRun(maqueen.Motors.All, maqueen.Dir.CCW, SPEED)
-        } else {
-            maqueen.motorRun(maqueen.Motors.All, maqueen.Dir.CCW, SPEED)
+        if (!(Playback)) {
+            if (RECORD == true) {
+                StartTimer()
+                maqueen.motorRun(maqueen.Motors.All, maqueen.Dir.CCW, SPEED)
+            } else {
+                maqueen.motorRun(maqueen.Motors.All, maqueen.Dir.CCW, SPEED)
+            }
         }
     } else if (control.eventValue() == EventBusValue.MES_DPAD_BUTTON_C_DOWN) {
-        if (TURN_MODE == true) {
-            if (RECORD == true) {
-                StartTimer()
-                maqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CW, 200)
-                maqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CW, SPEED / 4)
+        if (!(Playback)) {
+            if (TURN_MODE == true) {
+                if (RECORD == true) {
+                    StartTimer()
+                    maqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CW, 200)
+                    maqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CW, SPEED / 4)
+                } else {
+                    maqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CW, 200)
+                    maqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CW, SPEED / 4)
+                }
             } else {
-                maqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CW, 200)
-                maqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CW, SPEED / 4)
-            }
-        } else {
-            if (RECORD == true) {
-                StartTimer()
-                maqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CW, SPEED)
-                maqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CCW, SPEED)
-            } else {
-                maqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CW, SPEED)
-                maqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CCW, SPEED)
+                if (RECORD == true) {
+                    StartTimer()
+                    maqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CW, SPEED)
+                    maqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CCW, SPEED)
+                } else {
+                    maqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CW, SPEED)
+                    maqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CCW, SPEED)
+                }
             }
         }
     } else if (control.eventValue() == EventBusValue.MES_DPAD_BUTTON_D_DOWN) {
-        if (TURN_MODE == true) {
-            if (RECORD == true) {
-                StartTimer()
-                maqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CW, 200)
-                maqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CW, SPEED / 4)
+        if (!(Playback)) {
+            if (TURN_MODE == true) {
+                if (RECORD == true) {
+                    StartTimer()
+                    maqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CW, 200)
+                    maqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CW, SPEED / 4)
+                } else {
+                    maqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CW, 200)
+                    maqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CW, SPEED / 4)
+                }
             } else {
-                maqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CW, 200)
-                maqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CW, SPEED / 4)
-            }
-        } else {
-            if (RECORD == true) {
-                StartTimer()
-                maqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CW, SPEED)
-                maqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CCW, SPEED)
-            } else {
-                maqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CW, SPEED)
-                maqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CCW, SPEED)
+                if (RECORD == true) {
+                    StartTimer()
+                    maqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CW, SPEED)
+                    maqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CCW, SPEED)
+                } else {
+                    maqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CW, SPEED)
+                    maqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CCW, SPEED)
+                }
             }
         }
     } else if (control.eventValue() == EventBusValue.MES_DPAD_BUTTON_1_DOWN) {
-        if (RECORD == true) {
-            if (SERVO == 30) {
-                SERVO = 0
+        if (!(Playback)) {
+            if (RECORD == true) {
+                if (SERVO == 30) {
+                    SERVO = 0
+                } else {
+                    SERVO = 30
+                }
+                maqueen.servoRun(maqueen.Servos.S2, SERVO)
             } else {
-                SERVO = 30
+                if (SERVO == 30) {
+                    SERVO = 0
+                } else {
+                    SERVO = 30
+                }
+                maqueen.servoRun(maqueen.Servos.S2, SERVO)
             }
-            maqueen.servoRun(maqueen.Servos.S2, SERVO)
-        } else {
-            if (SERVO == 30) {
-                SERVO = 0
-            } else {
-                SERVO = 30
-            }
-            maqueen.servoRun(maqueen.Servos.S2, SERVO)
         }
     } else if (control.eventValue() == EventBusValue.MES_DPAD_BUTTON_2_DOWN) {
         if (cycle == 1) {
@@ -92,12 +115,16 @@ control.onEvent(EventBusSource.MES_DPAD_CONTROLLER_ID, EventBusValue.MICROBIT_EV
         }
     } else if (control.eventValue() == EventBusValue.MES_DPAD_BUTTON_3_DOWN) {
         if (cycle == 1) {
-            TURN_MODE = !(TURN_MODE)
+            if (!(Playback)) {
+                TURN_MODE = !(TURN_MODE)
+            }
         } else if (cycle == 2) {
-            if (Change_SFX == 1) {
-                Change_SFX = 2
-            } else if (Change_SFX == 2) {
-                Change_SFX = 1
+            if (!(Playback)) {
+                if (Change_SFX == 1) {
+                    Change_SFX = 2
+                } else if (Change_SFX == 2) {
+                    Change_SFX = 1
+                }
             }
         } else if (cycle == 3) {
             if (RECORD == false) {
@@ -109,34 +136,38 @@ control.onEvent(EventBusSource.MES_DPAD_CONTROLLER_ID, EventBusValue.MICROBIT_EV
         }
     } else if (control.eventValue() == EventBusValue.MES_DPAD_BUTTON_4_DOWN) {
         if (cycle == 1) {
-            if (SPEED == 100) {
-                SPEED = 200
-                basic.showLeds(`
-                    . # # . .
-                    . . . # .
-                    . . # . .
-                    . # . . .
-                    . # # # .
-                    `)
-            } else {
-                SPEED = 100
-                basic.showLeds(`
-                    . . # . .
-                    . # # . .
-                    . . # . .
-                    . . # . .
-                    . # # # .
-                    `)
+            if (!(Playback)) {
+                if (SPEED == 100) {
+                    SPEED = 200
+                    basic.showLeds(`
+                        . # # . .
+                        . . . # .
+                        . . # . .
+                        . # . . .
+                        . # # # .
+                        `)
+                } else {
+                    SPEED = 100
+                    basic.showLeds(`
+                        . . # . .
+                        . # # . .
+                        . . # . .
+                        . . # . .
+                        . # # # .
+                        `)
+                }
             }
         } else if (cycle == 2) {
-            if (Change_SFX == 1) {
-                music.playMelody("C5 C5 C5 - - C5 C5 C5 ", 1000)
-            }
-            if (Change_SFX == 2) {
-                soundExpression.giggle.playUntilDone()
+            if (!(Playback)) {
+                if (Change_SFX == 1) {
+                    music.playMelody("C5 C5 C5 - - C5 C5 C5 ", 1000)
+                }
+                if (Change_SFX == 2) {
+                    soundExpression.giggle.playUntilDone()
+                }
             }
         } else if (cycle == 3) {
-        	
+            Playback = !(Playback)
         }
     } else if (control.eventValue() == EventBusValue.MES_DPAD_BUTTON_A_UP) {
         if (RECORD == true) {
@@ -183,6 +214,7 @@ let Change_SFX = 0
 let _ = 0
 let Timer = 0
 let elapsed = 0
+let Playback = false
 let SPEED = 0
 let TURN_MODE = false
 let SERVO = 0
@@ -199,6 +231,7 @@ RECORD = false
 SERVO = 30
 TURN_MODE = true
 SPEED = 100
+Playback = false
 basic.showLeds(`
     . . # . .
     . # # . .
