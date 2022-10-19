@@ -1,9 +1,11 @@
+function Set_Arrays (List: number, Text_List: string, Servo: string) {
+    servos.push(Servo)
+    list.push(List)
+    text_list.push(Text_List)
+}
 function Stop_Timer () {
     elapsed = input.runningTime() - Timer
 }
-input.onButtonPressed(Button.A, function () {
-    basic.showIcon(IconNames.Happy)
-})
 function bob () {
     // Playback loop
     while (Playback == true) {
@@ -52,13 +54,6 @@ function bob () {
         }
     }
 }
-input.onButtonPressed(Button.B, function () {
-    if (_ == 1) {
-        _ = 0
-    } else {
-        _ = 1
-    }
-})
 control.onEvent(EventBusSource.MES_DPAD_CONTROLLER_ID, EventBusValue.MICROBIT_EVT_ANY, function () {
     if (control.eventValue() == EventBusValue.MES_DPAD_BUTTON_A_DOWN) {
         // Forwards
@@ -146,7 +141,6 @@ control.onEvent(EventBusSource.MES_DPAD_CONTROLLER_ID, EventBusValue.MICROBIT_EV
             }
         }
     } else if (control.eventValue() == EventBusValue.MES_DPAD_BUTTON_2_DOWN) {
-        music.playTone(988, music.beat(BeatFraction.Whole))
         // Change Cycle
         if (cycle == 1) {
             cycle = 2
@@ -178,7 +172,7 @@ control.onEvent(EventBusSource.MES_DPAD_CONTROLLER_ID, EventBusValue.MICROBIT_EV
             }
         }
     } else if (control.eventValue() == EventBusValue.MES_DPAD_BUTTON_4_DOWN) {
-        // Button 4 functions
+        // Change Cycle
         if (cycle == 1) {
             if (!(Playback)) {
                 if (SPEED == 100) {
@@ -216,36 +210,26 @@ control.onEvent(EventBusSource.MES_DPAD_CONTROLLER_ID, EventBusValue.MICROBIT_EV
     } else if (control.eventValue() == EventBusValue.MES_DPAD_BUTTON_A_UP) {
         if (RECORD == true) {
             Stop_Timer()
-            text_list.push("Forwards")
-            servos.push("")
-            list.push(elapsed)
+            Set_Arrays(elapsed, "Forwards", "")
         }
     } else if (control.eventValue() == EventBusValue.MES_DPAD_BUTTON_B_UP) {
         if (RECORD == true) {
             Stop_Timer()
-            text_list.push("Backwards")
-            servos.push("")
-            list.push(elapsed)
+            Set_Arrays(elapsed, "Backwards", "")
         }
     } else if (control.eventValue() == EventBusValue.MES_DPAD_BUTTON_C_UP) {
         if (RECORD == true) {
             Stop_Timer()
-            text_list.push("Left")
-            servos.push("")
-            list.push(elapsed)
+            Set_Arrays(elapsed, "Left", "")
         }
     } else if (control.eventValue() == EventBusValue.MES_DPAD_BUTTON_D_UP) {
         if (RECORD == true) {
             Stop_Timer()
-            text_list.push("Right")
-            servos.push("")
-            list.push(elapsed)
+            Set_Arrays(elapsed, "Right", "")
         }
     } else if (control.eventValue() == EventBusValue.MES_DPAD_BUTTON_1_UP) {
         if (RECORD == true) {
-            servos.push("Servo")
-            text_list.push("")
-            list.push(-10)
+            Set_Arrays(-10, "Servo", "")
         }
     } else {
         if (!(Playback)) {
@@ -257,7 +241,6 @@ function StartTimer () {
     Timer = input.runningTime()
 }
 let Change_SFX = 0
-let _ = 0
 let Timer = 0
 let elapsed = 0
 let Playback = false
@@ -280,10 +263,3 @@ SERVO = 30
 TURN_MODE = true
 SPEED = 100
 Playback = false
-basic.showLeds(`
-    . . # . .
-    . # # . .
-    . . # . .
-    . . # . .
-    . # # # .
-    `)
