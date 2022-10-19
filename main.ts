@@ -146,6 +146,7 @@ control.onEvent(EventBusSource.MES_DPAD_CONTROLLER_ID, EventBusValue.MICROBIT_EV
             }
         }
     } else if (control.eventValue() == EventBusValue.MES_DPAD_BUTTON_2_DOWN) {
+        music.playTone(988, music.beat(BeatFraction.Whole))
         // Change Cycle
         if (cycle == 1) {
             cycle = 2
